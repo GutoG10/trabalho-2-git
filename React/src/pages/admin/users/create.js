@@ -36,7 +36,7 @@ export default function CreateUsers() {
     };
 
     return (
-        <div className="container mx-auto max-w-3xl bg-white p-6 rounded shadow-lg border-solid border-2 border-gray-500">
+        <div className="container mx-auto max-w-3xl bg-white p-6 rounded shadow-lg border-solid border-2 border-gray-300">
             <a href="/admin/home" className="flex items-center text-gray-700 hover:text-gray-900 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -56,7 +56,7 @@ export default function CreateUsers() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
-                        className="border-solid border-2 border-gray-500 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
                 </div>
 
@@ -68,7 +68,7 @@ export default function CreateUsers() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className=" border-solid border-2 border-gray-500 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className=" border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
                 </div>
 
@@ -80,7 +80,7 @@ export default function CreateUsers() {
                         value={user}
                         onChange={(e) => setUser(e.target.value)}
                         required
-                        className="border-solid border-2 border-gray-500 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
                 </div>
 
@@ -92,7 +92,7 @@ export default function CreateUsers() {
                         value={pwd}
                         onChange={(e) => setPwd(e.target.value)}
                         required
-                        className="border-solid border-2 border-gray-500 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
                 </div>
 
@@ -103,7 +103,7 @@ export default function CreateUsers() {
                         value={level}
                         onChange={(e) => setLevel(e.target.value)}
                         required
-                        className="border-solid border-2 border-gray-500 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     >
                         <option value="Admin">Admin</option>
                         <option value="Usuario">Usuário</option>
@@ -117,7 +117,7 @@ export default function CreateUsers() {
                         value={status}
                         onChange={(e) => setStatus(e.target.value)}
                         required
-                        className="border-solid border-2 border-gray-500 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     >
                         <option value="on">Ativo</option>
                         <option value="off">Inativo</option>
@@ -131,7 +131,7 @@ export default function CreateUsers() {
                         id="comments"
                         value={comments}
                         onChange={(e) => setComments(e.target.value)}
-                        className="border-solid border-2 border-gray-500 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
                 </div>
 

@@ -20,7 +20,7 @@ export default function CadastroContas() {
     };
 
     return (
-        <div className="container mx-auto max-w-3xl bg-white p-6 rounded shadow-lg">
+        <div className="container mx-auto max-w-3xl bg-white p-6 rounded shadow-lg border-solid border-2 border-gray-300">
             <a href="/admin/home" className="flex items-center text-gray-700 hover:text-gray-900 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -33,7 +33,7 @@ export default function CadastroContas() {
             <form onSubmit={handleSubmit} className="mt-4">
                 <div className="mb-4">
                     <label htmlFor="description" className="block text-sm font-medium text-gray-700">Descrição:</label>
-                    <select name="status" id="status" class=" border-solid border-2 border-gray-500mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <select name="status" id="status" class=" border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     <option value="">Selecione uma opção</option>
                     <option value="Conta Corrente">Conta Poupança</option>
                     <option value="Conta Poupança">Conta Corrente</option>
@@ -47,7 +47,7 @@ export default function CadastroContas() {
                         id="comments"
                         value={comments}
                         onChange={(e) => setComments(e.target.value)}
-                        className="border-solid border-2 border-gray-500 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
                 </div>
 
