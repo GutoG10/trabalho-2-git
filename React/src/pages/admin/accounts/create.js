@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-export default function CadastroContas() {
-    const [description, setDescription] = useState('');
+export default function CreateAccounts() {
+    const [description, setDescription] = useState("");
     const [comments, setComments] = useState('');
 
     const handleSubmit = (event) => {
@@ -15,7 +15,7 @@ export default function CadastroContas() {
     };
 
     const clearForm = () => {
-        setDescription('');
+        setDescription("");
         setComments('');
     };
 
@@ -33,7 +33,7 @@ export default function CadastroContas() {
             <form onSubmit={handleSubmit} className="mt-4">
                 <div className="mb-4">
                     <label htmlFor="description" className="block text-sm font-medium text-gray-700">Descrição:</label>
-                    <select name="status" id="status" class=" border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <select name="status" value={description} onChange={(e) => setDescription(e.target.value)} id="status" className=" border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     <option value="">Selecione uma opção</option>
                     <option value="Conta Corrente">Conta Poupança</option>
                     <option value="Conta Poupança">Conta Corrente</option>
