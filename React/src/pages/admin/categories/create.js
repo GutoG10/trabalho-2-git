@@ -62,6 +62,7 @@ export default function CreateCategories() {
                         className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         required
                     >
+                        <option value={""}>--Selecione--</option>
                         <option value="Receita">Receita</option>
                         <option value="Despesa">Despesa</option>
                     </select>

@@ -82,6 +82,7 @@ return(
                         onChange={handleChange}
                         className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     >
+                        <option value={""}>--Selecione--</option>
                         <option value="Receita">Receita</option>
                         <option value="Despesa">Despesa</option>
                     </select>
@@ -180,6 +181,7 @@ return(
                         onChange={handleChange}
                         className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     >
+                        <option value={""}>--Selecione--</option>
                         <option value="Lançada">Lançada</option>
                         <option value="Confirmada">Confirmada</option>
                         <option value="Paga">Paga</option>
