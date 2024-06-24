@@ -26,18 +26,16 @@ router.get("/", async (req, res) => {
     }
 }) 
 
-router.get("/:pid", async(req, res) =>{
-    const pid = req.query.pid;
-    console.log("caiu")
-    try {
-      const foundedUser = await User.findById( pid );
-      console.log('Objeto encontrado com sucesso!');
-      res.json({ message: 'Usuário encontrado com sucesso!', foundedUser });
-    } catch (error) {
-        console.error('Erro ao encontrar Usuario:', err.message);
-      res.status(500).json({ error: 'Erro durante a tentativa de encontrar usuarios' });
-    }
-})
+router.get('/:pid', async (req, res) => {
+  const pid = req.params.pid;
+  try {
+    const foundedUser = await User.findById( pid );
+    console.log('Objeto encontrado com sucesso!');
+    res.json(foundedUser);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 router.post('/', async (req, res) => {
     const user = req.body.user;

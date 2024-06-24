@@ -20,7 +20,7 @@ export default function users() {
         getAllUsers();
     
       }, []);
-
+      
       return (
         <div className="min-h-screen bg-gray-100">
             <HeadAdm></HeadAdm>

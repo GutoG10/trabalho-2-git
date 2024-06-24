@@ -3,28 +3,31 @@ import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
 import Axios from "axios";
 
-export default function readuser(){
+export default function ReadUser(){
     
-    const API_URL = "http://localhost:8080/api/usuarios/"
+    const API_URL = "http://localhost:8080/api/usuarios/";
 
-    const router = useRouter();
-    const [pid] = useState(router.query.pid)
-    console.log(pid);
+  
     const [user, setUser] = useState({
-        name: "",
-        email: "",
-        user: "",
-        pwd: "",
-        level: "",
-        status: ""
-    })
+      name: "",
+      email: "",
+      user: "",
+      pwd: "",
+      level: "",
+      status: ""
+    });
+  
+    const router = useRouter();
+  const [pid] = useState(router.query.pid);
+console.log(pid)
 
 
-    useEffect(() => {
+     useEffect(() => {
         const getUser = async () => {
           try {
-            const response = await Axios.get(API_URL+pid);
-            setUser( response.data.foundedUser);
+            const response = await Axios.get(API_URL + pid);
+            console.log(response.data)
+            setUser( response.data);
           } catch (error) {
             console.error('Erro ao buscar os usuários:', error);
           }
@@ -33,6 +36,7 @@ export default function readuser(){
         getUser();
     
       }, []);
+  
     
     
     return(
