@@ -27,7 +27,6 @@ app.use(function (req, res, next) {
     }
 }
 
-// Executa a função de conexão
 main();
   // function dadosUsuario(){
   //   const dados = {

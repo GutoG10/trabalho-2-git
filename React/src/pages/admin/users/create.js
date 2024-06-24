@@ -1,43 +1,52 @@
+import axios, { Axios } from 'axios';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function CreateUsers() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
-    const [level, setLevel] = useState('Admin');
-    const [status, setStatus] = useState('on');
-    const [comments, setComments] = useState('');
+    
+    const API_URL = "http://localhost:8080/api/usuarios/"
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Aqui você pode implementar o código para enviar os dados do formulário
-        console.log({
-            name,
-            email,
-            user,
-            pwd,
-            level,
-            status,
-            comments
+    const [user, setUser] = useState({
+            name: "",
+            email: "",
+            user: "",
+            pwd: "",
+            level: "",
+            status: ""
+    });
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setUser({
+          ...user,
+          [name]: value
         });
-        // Limpar os campos após o envio
-        clearForm();
-    };
+      };
 
-    const clearForm = () => {
-        setName('');
-        setEmail('');
-        setUser('');
-        setPwd('');
-        setLevel('Admin');
-        setStatus('on');
-        setComments('');
-    };
+    const handleCreateUser = async () => {
+        try {
+          const response = await axios.post(API_URL, { user });   
+          alert(response.data.message)
+        } catch (error) {
+          console.error('Erro ao criar o Usuário:', error);
+        }
+      };
+    
+
+    /* const clearForm = () => {
+        setUser({
+            name: "",
+            email: "",
+            user: "",
+            pwd: "",
+            level: "Admin",
+            status: "on"
+        })
+    }; */
 
     return (
         <div className="container mx-auto max-w-3xl bg-white p-6 rounded shadow-lg border-solid border-2 border-gray-300">
-            <a href="/admin/home" className="flex items-center text-gray-700 hover:text-gray-900 mb-4">
+            <a href="/admin/users" className="flex items-center text-gray-700 hover:text-gray-900 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
@@ -46,15 +55,15 @@ export default function CreateUsers() {
 
             <h1 className="text-3xl font-bold mb-8">Cadastro de Usuários</h1>
 
-            <form onSubmit={handleSubmit}>
-
+            <form onSubmit={handleCreateUser}>
                 <div className="mb-4">
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 ">Nome:</label>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome:</label>
                     <input
                         type="text"
                         id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        name="name"
+                        value={user.name}
+                        onChange={handleChange}
                         required
                         className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
@@ -65,10 +74,11 @@ export default function CreateUsers() {
                     <input
                         type="email"
                         id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        name='email'
+                        value={user.email}
+                        onChange={handleChange}
                         required
-                        className=" border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
                 </div>
 
@@ -77,8 +87,9 @@ export default function CreateUsers() {
                     <input
                         type="text"
                         id="user"
-                        value={user}
-                        onChange={(e) => setUser(e.target.value)}
+                        name='user'
+                        value={user.user}
+                        onChange={handleChange}
                         required
                         className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
@@ -89,10 +100,11 @@ export default function CreateUsers() {
                     <input
                         type="password"
                         id="pwd"
-                        value={pwd}
-                        onChange={(e) => setPwd(e.target.value)}
-                        required
+                        name='pwd'
+                        value={user.pwd}
+                        onChange={handleChange}
                         className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        required
                     />
                 </div>
 
@@ -100,11 +112,13 @@ export default function CreateUsers() {
                     <label htmlFor="level" className="block text-sm font-medium text-gray-700">Nível de Acesso:</label>
                     <select
                         id="level"
-                        value={level}
-                        onChange={(e) => setLevel(e.target.value)}
+                        name='level'
+                        value={user.level}
+                        onChange={handleChange}
                         required
                         className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     >
+                        <option value={""}>--Selecione--</option>
                         <option value="Admin">Admin</option>
                         <option value="Usuario">Usuário</option>
                     </select>
@@ -114,40 +128,25 @@ export default function CreateUsers() {
                     <label htmlFor="status" className="block text-sm font-medium text-gray-700">Status:</label>
                     <select
                         id="status"
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value)}
+                        name='status'
+                        value={user.status}
+                        onChange={handleChange}
                         required
                         className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     >
-                        <option value="on">Ativo</option>
-                        <option value="off">Inativo</option>
+                        <option value={""}>--Selecione--</option>
+                        <option value={"on"}>Ativo</option>
+                        <option value={"off"}>Inativo</option>
                     </select>
                 </div>
-
-                <div className="mb-4">
-                    <label htmlFor="comments" className="block text-sm font-medium text-gray-700">Comentários:</label>
-                    <input
-                        type="text"
-                        id="comments"
-                        value={comments}
-                        onChange={(e) => setComments(e.target.value)}
-                        className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    />
-                </div>
-
                 <button
-                    id="botaoAdicionar"
-                    type="submit"
+                    id="botaoAdicionar" 
+                    type='submit'
                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                 >
                     Cadastrar
                 </button>
-
             </form>
-
-            <h2 className="text-2xl font-bold mt-8 mb-4">Lista de Usuários</h2>
-            <ul id="userList" className="mb-8"></ul>
-
         </div>
     );
 }

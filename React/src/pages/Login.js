@@ -23,7 +23,7 @@ export default function Login() {
             });
             console.log(response.data);
             if (response.data.success) {
-                Router.push('/admin/home')
+                Router.push('/admin')
                 // Redirecionar ou executar outras ações após login bem-sucedido
             } else {
                 alert("Credenciais inválidas!");
