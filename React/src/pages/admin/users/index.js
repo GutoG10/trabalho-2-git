@@ -3,6 +3,7 @@ import Router from "next/router";
 import HeadAdm from "@/components/HeadAdm";
 import axios from "axios";
 import UserAction from "@/components/UserAction";
+import Head from "next/head";
 export default function users() {
     const API_URL = "http://localhost:8080/api/usuarios"
     const [users, setUsers] = useState([]);
@@ -23,6 +24,7 @@ export default function users() {
       
       return (
         <div className="min-h-screen bg-gray-100">
+            <Head><title>Lista de Usuários</title></Head>
             <HeadAdm></HeadAdm>
         <div className="flex flex-col items-center justify-center w-full">
         <h1 className="text-[30px]">Lista De Usuários</h1>

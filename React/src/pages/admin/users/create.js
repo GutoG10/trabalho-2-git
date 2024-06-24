@@ -1,6 +1,7 @@
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 import Link from 'next/link';
 import { useState } from 'react';
+import Head from 'next/head';
 
 export default function CreateUsers() {
     
@@ -33,19 +34,11 @@ export default function CreateUsers() {
       };
     
 
-    /* const clearForm = () => {
-        setUser({
-            name: "",
-            email: "",
-            user: "",
-            pwd: "",
-            level: "Admin",
-            status: "on"
-        })
-    }; */
-
     return (
         <div className="container mx-auto max-w-3xl bg-white p-6 rounded shadow-lg border-solid border-2 border-gray-300">
+<Head>
+<title>Cadastrar Usuário</title>
+</Head>
             <a href="/admin/users" className="flex items-center text-gray-700 hover:text-gray-900 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

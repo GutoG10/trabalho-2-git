@@ -13,13 +13,13 @@ export default function headAdm(){
               
             </div>
             <div className="flex">
-              <button onClick={() => { Router.push("/admin/categories/create")}} className="mr-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+              <button onClick={() => { Router.push("/admin/categories")}} className="mr-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                 Categorias
               </button>
-              <button onClick={() => { Router.push("/admin/accounts/create")}} className="mr-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+              <button onClick={() => { Router.push("/admin/accounts")}} className="mr-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                 Contas
               </button>
-              <button onClick={() => { Router.push("/admin/entries/create")}} className="mr-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+              <button onClick={() => { Router.push("/admin/entries")}} className="mr-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                 Lançamentos
               </button>
               <button onClick={() => { Router.push("/admin/users")}} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
