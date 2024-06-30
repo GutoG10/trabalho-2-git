@@ -6,6 +6,7 @@ const rotasContas = require('./rotasContas')
 const rotasUsuarios = require('./rotasUsuarios')
 
 
+
 router.use(express.json())
 router.use('/categorias', rotasCategorias)
 router.use('/lancamentos', rotasLancamentos)

@@ -4,41 +4,42 @@ import { useState } from 'react';
 import Head from 'next/head';
 
 export default function CreateUsers() {
-    
+
     const API_URL = "http://localhost:8080/api/usuarios/"
 
     const [user, setUser] = useState({
-            name: "",
-            email: "",
-            user: "",
-            pwd: "",
-            level: "",
-            status: ""
+        name: "",
+        email: "",
+        user: "",
+        pwd: "",
+        level: "",
+        status: ""
     });
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setUser({
-          ...user,
-          [name]: value
+            ...user,
+            [name]: value
         });
-      };
+    };
 
     const handleCreateUser = async () => {
         try {
-          const response = await axios.post(API_URL, { user });   
-          alert(response.data.message)
+
+            const response = await axios.post(API_URL, { user });
+            alert(response.data.message)
         } catch (error) {
-          console.error('Erro ao criar o Usuário:', error);
+            console.error('Erro ao criar o Usuário:', error);
         }
-      };
-    
+    };
+
 
     return (
         <div className="container mx-auto max-w-3xl bg-white p-6 rounded shadow-lg border-solid border-2 border-gray-300">
-<Head>
-<title>Cadastrar Usuário</title>
-</Head>
+            <Head>
+                <title>Cadastrar Usuário</title>
+            </Head>
             <a href="/admin/users" className="flex items-center text-gray-700 hover:text-gray-900 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -133,7 +134,7 @@ export default function CreateUsers() {
                     </select>
                 </div>
                 <button
-                    id="botaoAdicionar" 
+                    id="botaoAdicionar"
                     type='submit'
                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                 >

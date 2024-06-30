@@ -19,12 +19,13 @@ export default function Login() {
         try {
             const response = await axios.post('http://localhost:8080/api/usuarios/login', {
                 email: usuario,
-                senha: senha
+                senha: senha  // Envia a senha também
             });
+
             console.log(response.data);
-            if (response.data.success) {
-                Router.push('/admin')
-                // Redirecionar ou executar outras ações após login bem-sucedido
+
+            if (response.data.email === usuario) {
+                Router.push('/admin');
             } else {
                 alert("Credenciais inválidas!");
             }
