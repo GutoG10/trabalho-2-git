@@ -29,7 +29,7 @@ console.log(pid)
             console.log(response.data)
             setUser( response.data);
           } catch (error) {
-            console.error('Erro ao buscar os usuários:', error);
+            console.error('Erro ao buscar o usuário:', error);
           }
         };
     
@@ -48,7 +48,7 @@ console.log(pid)
                 Voltar
             </a>
 
-            <h1 className="text-3xl font-bold mb-8">Cadastro de Usuários</h1>
+            <h1 className="text-3xl font-bold mb-8">Visualização do Usuário</h1>
 
             <form>
 

@@ -43,10 +43,9 @@ router.post('/', async (req, res) => {
   user.pwd = hashedPwd
   try {
     // Criptografar a senha antes de salvar
-    console.log(user)
     const newUser = await User.create(user);
 
-    console.log('Objeto salvo com sucesso!');
+    console.log('Usuario salvo com sucesso!');
     res.json({ message: 'Usuário salvo com sucesso!', newUser });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -72,6 +71,39 @@ router.post('/login', async (req, res) => {
     }
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+});
+
+router.delete('/:pid', async (req, res) => {
+  const pid = req.params.pid;
+  try {
+    const deletedUser = await User.findByIdAndDelete(pid);
+    console.log('Usuário deletado:', deletedUser);
+    res.status(200).json({ message: 'Usuário deletado com sucesso!', deletedUser });
+  } catch (err) {
+    console.log("Deu problema: ",err)
+    res.status(400).json({ message: err.message });
+  }
+});
+
+router.put('/:pid', async (req, res) => {
+  const pid = req.params.pid;
+  const newUser = req.body.user;
+  console.log(newUser);
+  try {
+    const updatedUser = await User.findByIdAndUpdate(pid, 
+      { 
+        name: newUser.name, 
+        email: newUser.email,
+        user: newUser.user,
+        level: newUser.level,
+        status: newUser.status,
+      }, { new: true });
+    console.log('Usuário Atualizado:', updatedUser);
+    res.json({ message: 'Usuário alterado com sucesso!', updatedUser });
+    //res.json(updatedUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 });
 

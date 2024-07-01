@@ -18,10 +18,12 @@ export default function CreateCategories() {
        })
     };
 
-    const handleCreateCategory = async () =>{
+    const handleCreateCategory = async (e) =>{
+        e.preventDefault();
         try {
             const response = await axios.post(API_URL, {category})
             alert(response.data.message);
+            window.location.href = '/admin/categories';
         } catch (error) {
             console.error(error);
         }

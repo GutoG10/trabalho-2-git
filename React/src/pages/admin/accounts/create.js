@@ -21,6 +21,7 @@ export default function CreateAccounts() {
         try {
             const response = await axios.post(API_URL, {account})
             alert(response.data.message);
+            window.location.href = '/admin/accounts';
         } catch (error) {
             console.error("Erro ao criar Conta: ", error);
         }
@@ -51,7 +52,7 @@ export default function CreateAccounts() {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="comment" className="block text-sm font-medium text-gray-700">Comentários:</label>
+                    <label htmlFor="comment" className="block text-sm font-medium text-gray-700">Comentário:</label>
                     <input
                         type="text"
                         id="comment"

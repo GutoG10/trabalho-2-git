@@ -24,11 +24,12 @@ export default function CreateUsers() {
         });
     };
 
-    const handleCreateUser = async () => {
+    const handleCreateUser = async (event) => {
+        event.preventDefault();
         try {
-
             const response = await axios.post(API_URL, { user });
-            alert(response.data.message)
+            alert(response.data.message);
+            window.location.href = '/admin/users';
         } catch (error) {
             console.error('Erro ao criar o Usuário:', error);
         }
