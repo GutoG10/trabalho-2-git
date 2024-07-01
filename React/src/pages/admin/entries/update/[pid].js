@@ -68,7 +68,7 @@ export default function UpdateEntry() {
 
   const handleUpdateEntry = async (event) => {
     event.preventDefault();
-    if (entry.status === "Paga" || entry.payment_date === "") {
+    if (entry.status === "Paga" && entry.payment_date === "") {
       alert(
         "Para um lançamento estar pago, ele precisa de uma data de pagamento"
       );
