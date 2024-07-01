@@ -36,11 +36,16 @@ export default function DeleteAccount(){
       const handleDeleteAccount = async () => {
         console.log(pid);
         try {
-          const response = await Axios.delete( API_URL + pid );
+          const response = await Axios.put(API_URL + pid, {
+            account: {
+              description: "Deletada",
+              comment: "Conta deletada" // mantenha o tipo atual da categoria
+            }
+          });
           alert(response.data.message);
           window.location.href = '/admin/accounts';
         } catch (error) {
-          console.error('Erro ao deletar a conta:', error);
+          console.error('Erro ao deletar a categoria:', error);
         }
       };
   

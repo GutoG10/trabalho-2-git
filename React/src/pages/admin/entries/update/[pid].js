@@ -68,12 +68,18 @@ export default function UpdateEntry() {
 
   const handleUpdateEntry = async (event) => {
     event.preventDefault();
-    try {
-      const response = await Axios.put(API_URL + pid, {entry});
-      alert(response.data.message);
-      router.push("/admin/entries");
-    } catch (error) {
-      console.error("Erro ao editar o lançamento:", error);
+    if (entry.status === "Paga" && entry.payment_date === "") {
+      alert(
+        "Para um lançamento estar pago, ele precisa de uma data de pagamento"
+      );
+    }else{
+      try {
+        const response = await Axios.put(API_URL + pid, {entry});
+        alert(response.data.message);
+        router.push("/admin/entries");
+      } catch (error) {
+        console.error("Erro ao editar o lançamento:", error);
+      }
     }
   };
 
