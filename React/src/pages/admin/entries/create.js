@@ -53,21 +53,27 @@ export default function EntriesCreate() {
     });
   };
 
-  const handleTypeChange = (event)=>{
-    const {name,value} = event.target;
-    setType({...type,
-      [name]:value,
-    })
-  }
+  const handleTypeChange = (event) => {
+    const valido = true;
+    const { name, value } = event.target;
+    setType({ ...type, [name]: value });
+  };
 
   const handleCreateEntry = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(API_URL, { entries });
-      alert(response.data.message);
-      window.location.href = "/admin/entries";
-    } catch (error) {
-      console.error("Erro ao criar o lançamento:", error);
+    if (entries.status === "Paga" || entries.payment_date === "") {
+      alert(
+        "Para um lançamento estar pago, ele precisa de uma data de pagamento"
+      );
+    }
+    else {
+      try {
+        const response = await axios.post(API_URL, { entries });
+        alert(response.data.message);
+        window.location.href = "/admin/entries";
+      } catch (error) {
+        console.error("Erro ao criar o lançamento:", error);
+      }
     }
   };
 
@@ -100,24 +106,24 @@ export default function EntriesCreate() {
       <span className="text-2xl font-bold">Cadastro de Lançamentos</span>
 
       <div className="mb-4">
-          <label
-            htmlFor="tipo"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Tipo:
-          </label>
-          <select
-            id="type"
-            name="type"
-            value={type.type}
-            onChange={handleTypeChange}
-            className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          >
-            <option value={""}>--Selecione--</option>
-            <option value="Receita">Receita</option>
-            <option value="Despesa">Despesa</option>
-          </select>
-        </div>
+        <label
+          htmlFor="tipo"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Tipo:
+        </label>
+        <select
+          id="type"
+          name="type"
+          value={type.type}
+          onChange={handleTypeChange}
+          className="border-solid border-2 border-gray-500 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        >
+          <option value={""}>--Selecione--</option>
+          <option value="Receita">Receita</option>
+          <option value="Despesa">Despesa</option>
+        </select>
+      </div>
 
       <form onSubmit={handleCreateEntry} className="mt-4">
         <div className="mb-4">
@@ -136,8 +142,7 @@ export default function EntriesCreate() {
             required
           >
             <option value={""}>--Selecione--</option>
-            {
-            category
+            {category
               .filter((categories) => categories.type === type.type)
               .map((filteredCategory) => (
                 <option key={filteredCategory._id} value={filteredCategory._id}>

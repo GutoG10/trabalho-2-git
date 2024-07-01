@@ -9,6 +9,7 @@ const EntriesList = ({ startDate, endDate }) => {
   const [entries, setEntries] = useState([]);
   const [categoryMap, setCategoryMap] = useState({});
   const [accountMap, setAccountMap] = useState({});
+  const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -31,6 +32,7 @@ const EntriesList = ({ startDate, endDate }) => {
           ...entry,
           type: categoryMap[entry.category] ? categoryMap[entry.category].type : "",
         }));
+
         setEntries(updatedEntries);
       } catch (error) {
         console.error("Erro ao buscar os lançamentos:", error);
@@ -68,9 +70,41 @@ const EntriesList = ({ startDate, endDate }) => {
     fetchEntries();
   }, [startDate, endDate]);
 
+  // Calcula o valor total com base na categoria de lançamento (receita ou despesa)
+  useEffect(() => {
+    let totalReceitas = 0;
+    let totalDespesas = 0;
+
+    entries.forEach(entry => {
+      const value = parseFloat(entry.value);
+      const category = categoryMap[entry.category];
+      if(entry.status!= "Cancelada"){
+        if (category) {
+          if (category.type === "Receita") {
+            totalReceitas += value;
+          } else if (category.type === "Despesa") {
+            totalDespesas += value;
+          }
+        }
+      }
+    });
+
+    const total = totalReceitas - totalDespesas;
+    setTotalAmount(total);
+  }, [entries, categoryMap]);
+
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <h1 className="text-[30px]">Lista De Lançamentos</h1>
+      <div className="mb-4">
+        <p className="font-semibold">
+          Valor Total: R${" "}
+          {totalAmount.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </p>
+      </div>
       <button
         onClick={() => Router.push("/admin/entries/create")}
         className="m-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
