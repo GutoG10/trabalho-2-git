@@ -1,54 +1,75 @@
-// components/EntriesList.js
-
-import React, { useEffect, useState } from "react";
-import Router from "next/router";
-import HeadAdm from "./HeadAdm";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Head from "next/head";
-import EntryAction from "./EntryAction";
+import EntryAction from "@/components/EntryAction";
+import Router from "next/router";
 
-const EntriesList = () => {
-  const API_URL = "http://localhost:8080/api";
-
+const EntriesList = ({ startDate, endDate }) => {
+  const API_URL = "http://localhost:8080/api/lancamentos";
   const [entries, setEntries] = useState([]);
   const [categoryMap, setCategoryMap] = useState({});
   const [accountMap, setAccountMap] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchEntries = async () => {
       try {
-        const entriesResponse = await axios.get(`${API_URL}/lancamentos`);
-        const categoriesResponse = await axios.get(`${API_URL}/categorias`);
-        const accountsResponse = await axios.get(`${API_URL}/contas`);
+        const response = await axios.get(API_URL, {
+          params: {
+            startDate,
+            endDate,
+          },
+        });
 
-        const updatedEntries = entriesResponse.data.map(entry => ({
+        // Ordena os lançamentos pela data de vencimento (due_date)
+        const sortedEntries = response.data.sort((a, b) => {
+          if (a.due_date < b.due_date) return -1;
+          if (a.due_date > b.due_date) return 1;
+          return 0;
+        });
+
+        const updatedEntries = sortedEntries.map((entry) => ({
           ...entry,
-          type: categoryMap[entry.category] ? categoryMap[entry.category].type : ""
+          type: categoryMap[entry.category] ? categoryMap[entry.category].type : "",
         }));
-
-        const categoryMapData = categoriesResponse.data.reduce((map, category) => {
-          map[category._id] = category;
-          return map;
-        }, {});
-
-        const accountMapData = accountsResponse.data.reduce((map, account) => {
-          map[account._id] = account.description;
-          return map;
-        }, {});
-
         setEntries(updatedEntries);
-        setCategoryMap(categoryMapData);
-        setAccountMap(accountMapData);
       } catch (error) {
-        console.error('Erro ao buscar os dados:', error);
+        console.error("Erro ao buscar os lançamentos:", error);
       }
     };
 
-    fetchData();
-  }, []);
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/categorias");
+        const categoryMap = response.data.reduce((map, category) => {
+          map[category._id] = category;
+          return map;
+        }, {});
+        setCategoryMap(categoryMap);
+      } catch (error) {
+        console.error("Erro ao buscar as categorias:", error);
+      }
+    };
+
+    const fetchAccounts = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/contas");
+        const accountMap = response.data.reduce((map, account) => {
+          map[account._id] = account.description;
+          return map;
+        }, {});
+        setAccountMap(accountMap);
+      } catch (error) {
+        console.error("Erro ao buscar as contas:", error);
+      }
+    };
+
+    fetchCategories();
+    fetchAccounts();
+    fetchEntries();
+  }, [startDate, endDate]);
 
   return (
-      <div className="flex flex-col items-center justify-center w-full">
+    <div className="flex flex-col items-center justify-center w-full">
         <h1 className="text-[30px]">Lista De Lançamentos</h1>
         <button onClick={() => Router.push("/admin/entries/create")} className="m-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="button" placeholder="Criar Lançamento">Criar Lançamento</button>
 
@@ -78,7 +99,7 @@ const EntriesList = () => {
                 <td className="p-2 border-solid border-2 border-gray-400">{accountMap[entry.account] || "--Deletado--"}</td>
                 <td className="p-2 border-solid border-2 border-gray-400">{entry.status}</td>
                 <td className="p-2 border-solid border-2 border-gray-400">
-                  <EntryAction pid={entry._id}></EntryAction>
+                  <EntryAction pid={ entry._id }></EntryAction>
                 </td>
               </tr>
             ))}
