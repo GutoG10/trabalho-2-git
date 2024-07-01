@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import HeadAdm from "@/components/HeadAdm";
 import Head from "next/head";

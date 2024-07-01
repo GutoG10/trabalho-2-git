@@ -28,25 +28,7 @@ app.use(function(req, res, next){ //
 }
 
 main();
-  // function dadosUsuario(){
-  //   const dados = {
-  //     email: "augustogsatiro@gmail.com",
-  //     senha: "teste"
-  //   };
-  //   return dados;
-  // };
-  // async function inserir() {
-  //   try {
-  //     const dado = dadosUsuario();
-  //     await axios.post(`http://localhost:8080/api/usuarios`, {
-  //       users: dado,
-  //     });
-      
-  //   } catch (error) {
-  //     console.error(`Erro ao contar álbuns no mongo:`, error.message);
-  //   }
-  // }
-  // inserir();
+  
   
 
   
