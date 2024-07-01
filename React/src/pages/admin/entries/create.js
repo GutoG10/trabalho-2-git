@@ -61,7 +61,7 @@ export default function EntriesCreate() {
 
   const handleCreateEntry = async (e) => {
     e.preventDefault();
-    if (entries.status === "Paga" || entries.payment_date === "") {
+    if (entries.status === "Paga" && entries.payment_date === "") {
       alert(
         "Para um lançamento estar pago, ele precisa de uma data de pagamento"
       );

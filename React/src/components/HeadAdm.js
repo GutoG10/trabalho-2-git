@@ -14,7 +14,7 @@ export default function headAdm(){
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
               <Link href={"/admin"}>
-              <h1 className="text-lg font-bold text-gray-900">Admin Dashboard</h1>
+              <h1 className="text-lg font-bold text-gray-900">Home</h1>
               </Link>
               
             </div>
